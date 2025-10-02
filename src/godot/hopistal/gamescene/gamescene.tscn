@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwcud51mawi1w"]
+
+[ext_resource type="Texture2D" uid="uid://ctmyf30hibobn" path="res://icon.svg" id="1_q5pjl"]
+[ext_resource type="PackedScene" uid="uid://bj806j3dj5ohu" path="res://gamescene/mobile/mobile.tscn" id="1_sqlu6"]
+[ext_resource type="Script" uid="uid://c3p7r6bvar75c" path="res://gamescene/glidy_mcglideface.gd" id="2_w7c7t"]
+[ext_resource type="Script" uid="uid://c1oewxsn4fo" path="res://gamescene/scripts/sprite_stacker.gd" id="3_l3350"]
+[ext_resource type="PackedScene" uid="uid://bh4t8wkgjuuv4" path="res://gamescene/car_scene.tscn" id="3_yoob7"]
+[ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://gamescene/scripts/rotate.gd" id="4_c2tuv"]
+[ext_resource type="Script" uid="uid://dwpbfg7cnyu6q" path="res://gamescene/scripts/character_body_2d.gd" id="5_msov4"]
+[ext_resource type="Texture2D" uid="uid://dle8hwsy8ntm7" path="res://spritestacks/lakitu.png" id="6_yoob7"]
+[ext_resource type="Texture2D" uid="uid://crtqripj7buyt" path="res://spritestacks/Screenshot 2025-09-28 at 22-07-29 66286.png (PNG Image 576 × 768 pixels) — Scaled (92%).png" id="11_w7c7t"]
+[ext_resource type="Script" uid="uid://b4f2tw0ghemf6" path="res://gamescene/path_utils.gd" id="12_w7c7t"]
+[ext_resource type="Script" uid="uid://8qot137xux1j" path="res://gamescene/car_spawner.gd" id="13_81cw3"]
+
+[sub_resource type="Curve2D" id="Curve2D_81cw3"]
+_data = {
+"points": PackedVector2Array(-2.954197, 105.680855, 2.954197, -105.680855, 118.543274, -445.00836, -95.59512, 29.234028, 95.59512, -29.234028, 268.19028, -608.0141, -25.27821, 47.00165, 25.27821, -47.00165, 447.16, -710.01764, 3.6703959, 47.19166, -3.6703959, -47.19166, 465.36032, -884.0238, -107.66495, 0, 107.66495, 0, 570.5177, -1023.0287, 22.022377, -90.7532, -22.022377, 90.7532, 630.17426, -759.0194, 1.2234659, -71.39251, -1.2234659, 71.39251, 536.13934, -562.0125, -48.938614, 43.561535, 48.938614, -43.561535, 652.4191, -522.0111, -36.70396, 42.35149, 36.70396, -42.35149, 828.35547, -700.01733, -26.916237, -44.771576, 26.916237, 44.771576, 934.5239, -674.0164, -116.2292, -37.511322, 116.2292, 37.511322, 1097.3156, -582.0132, 115.00574, -12.100426, -115.00574, 12.100426, 1079.1152, -416.00732, 69.737526, -70.18247, -69.737526, 70.18247, 780.8324, -420.00748, -30.586634, -30.251064, 30.586634, 30.251064, 875.04004, -227.74002, -14.681583, -55.66196, 14.681583, 55.66196, 1172.139, 90.010445, 78.30178, 24.200853, -78.30178, -24.200853, 1047.7703, 184.01375, 26.226072, 20.750673, -26.226072, -20.750673, 939.5796, 52.009106, 28.848679, 23.344507, -28.848679, -23.344507, 834.42224, 16.007841, 47.206932, 46.689014, -47.206932, -46.689014, 753.5319, -115.9968, 81.30083, 41.501347, -81.30083, -41.501347, 551.3063, -160.99838, 112.513336, -42.667263, -112.513336, 42.667263, 363.23636, -380.00607, 17.117664, -91.013725, -17.117664, 91.013725, 334.92474, -55.99469, 72.43494, 3.7721004, -72.43494, -3.7721004, 223.70064, 95.01062, 3.3367233, 148.50522, -3.3367233, -148.50522, 117.53214, -120.99698, 0, 0, 0, 0, 118.543274, -445.00836)
+}
+point_count = 25
+
+[node name="GLOBAL" type="Node2D"]
+
+[node name="WORLD_SCALED" type="Node2D" parent="."]
+scale = Vector2(1, 0.6)
+
+[node name="Marker" type="Node2D" parent="WORLD_SCALED"]
+
+[node name="Icon" type="Sprite2D" parent="WORLD_SCALED/Marker"]
+scale = Vector2(0.1, 0.167)
+texture = ExtResource("1_q5pjl")
+
+[node name="glidy_mcglideface" type="Node2D" parent="WORLD_SCALED" node_paths=PackedStringArray("path2follow")]
+script = ExtResource("2_w7c7t")
+path2follow = NodePath("../Path2D")
+
+[node name="Icon" type="Sprite2D" parent="WORLD_SCALED/glidy_mcglideface"]
+modulate = Color(1, 0, 0.6039216, 1)
+scale = Vector2(0.1, 0.167)
+texture = ExtResource("1_q5pjl")
+
+[node name="Label" type="Label" parent="WORLD_SCALED/glidy_mcglideface"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CARBODY2D" parent="WORLD_SCALED" node_paths=PackedStringArray("Marker", "race_path") instance=ExtResource("3_yoob7")]
+Marker = NodePath("../Marker")
+race_path = NodePath("../Path2D")
+
+[node name="CarSpawner" type="Node2D" parent="WORLD_SCALED" node_paths=PackedStringArray("spawner_race_path")]
+script = ExtResource("13_81cw3")
+car_scene = ExtResource("3_yoob7")
+num = 5
+spawner_race_path = NodePath("../Path2D")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="WORLD_SCALED" node_paths=PackedStringArray("JoystickController")]
+position = Vector2(0, -30)
+motion_mode = 1
+script = ExtResource("5_msov4")
+JoystickController = NodePath("Camera2D/Joystick")
+
+[node name="Renderer" type="Node2D" parent="WORLD_SCALED/CharacterBody2D" node_paths=PackedStringArray("source_im", "im_container")]
+position = Vector2(0, 30)
+script = ExtResource("3_l3350")
+source_im = NodePath("Lakitu")
+im_container = NodePath("container")
+
+[node name="Lakitu" type="Sprite2D" parent="WORLD_SCALED/CharacterBody2D/Renderer"]
+texture_filter = 1
+position = Vector2(0, -31)
+texture = ExtResource("6_yoob7")
+region_enabled = true
+region_rect = Rect2(0, 800, 40, 40)
+script = ExtResource("4_c2tuv")
+
+[node name="container" type="Node2D" parent="WORLD_SCALED/CharacterBody2D/Renderer"]
+position = Vector2(0, -30)
+
+[node name="Camera2D" type="Camera2D" parent="WORLD_SCALED/CharacterBody2D"]
+position = Vector2(1, 30)
+scale = Vector2(1, 1.6666666)
+zoom = Vector2(5, 5)
+
+[node name="Joystick" parent="WORLD_SCALED/CharacterBody2D/Camera2D" instance=ExtResource("1_sqlu6")]
+modulate = Color(1, 1, 1, 0.41568628)
+
+[node name="Screenshot20250928At22072966286_png(pngImage576×768Pixels)—Scaled(92_)" type="Sprite2D" parent="WORLD_SCALED"]
+z_index = -1
+position = Vector2(681, -458.33328)
+scale = Vector2(8.349, 8.349)
+texture = ExtResource("11_w7c7t")
+region_enabled = true
+region_rect = Rect2(0, 0, 180.5, 187)
+
+[node name="Path2D" type="Path2D" parent="WORLD_SCALED"]
+z_index = -1
+position = Vector2(5.761406, -0.012130738)
+curve = SubResource("Curve2D_81cw3")
+script = ExtResource("12_w7c7t")

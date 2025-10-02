@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwcud51mawi1w"]
+
+[ext_resource type="Script" uid="uid://c1oewxsn4fo" path="res://sprite_stacker.gd" id="1_epypp"]
+[ext_resource type="Script" uid="uid://lgo8kd1q67ud" path="res://camera_2d_controller.gd" id="3_epypp"]
+[ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://rotate.gd" id="4_0hol4"]
+[ext_resource type="Texture2D" uid="uid://dle8hwsy8ntm7" path="res://lakitu.png" id="4_q6r6c"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0e48y"]
+load_path = "res://.godot/imported/goofy_test.png-1538392ec7c98e7b3f8ec3762b5d9711.ctex"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="Car" type="Node2D" parent="RigidBody2D"]
+scale = Vector2(1, 0.6)
+script = ExtResource("1_epypp")
+metadata/goofy_src = NodePath("Goofy")
+
+[node name="Goofy" type="Sprite2D" parent="RigidBody2D/Car"]
+texture_filter = 1
+rotation = 0.3874631
+texture = SubResource("CompressedTexture2D_0e48y")
+region_enabled = true
+region_rect = Rect2(0, 1400, 40, 40)
+script = ExtResource("4_0hol4")
+
+[node name="container" type="Node2D" parent="RigidBody2D/Car"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+script = ExtResource("3_epypp")
+metadata/target = NodePath("../RigidBody2D/Car")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, -30)
+motion_mode = 1
+script = ExtResource("1_epypp")
+
+[node name="Rendering" type="Node2D" parent="CharacterBody2D"]
+position = Vector2(0, 30)
+
+[node name="container" type="Node2D" parent="CharacterBody2D/Rendering"]
+position = Vector2(0, -30)
+scale = Vector2(1, 0.6)
+
+[node name="Lakitu" type="Sprite2D" parent="CharacterBody2D/Rendering"]
+texture_filter = 1
+position = Vector2(0, -31)
+texture = ExtResource("4_q6r6c")
+region_enabled = true
+region_rect = Rect2(0, 800, 40, 40)
+script = ExtResource("4_0hol4")

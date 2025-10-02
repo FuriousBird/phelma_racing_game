@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwcud51mawi1w"]
+
+[ext_resource type="Script" uid="uid://c1oewxsn4fo" path="res://sprite_stacker.gd" id="1_epypp"]
+[ext_resource type="Script" uid="uid://v5fcvksb8b1u" path="res://car_ai.gd" id="1_q6r6c"]
+[ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://rotate.gd" id="4_0hol4"]
+[ext_resource type="Script" uid="uid://dwpbfg7cnyu6q" path="res://character_body_2d.gd" id="4_kdubu"]
+[ext_resource type="Texture2D" uid="uid://dle8hwsy8ntm7" path="res://lakitu.png" id="4_q6r6c"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0e48y"]
+load_path = "res://.godot/imported/goofy_test.png-1538392ec7c98e7b3f8ec3762b5d9711.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
+radius = 24.230375
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6r6c"]
+radius = 10.378634
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CARBODY2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("1_q6r6c")
+target = NodePath("../CharacterBody2D")
+
+[node name="Renderer" type="Node2D" parent="CARBODY2D"]
+script = ExtResource("1_epypp")
+
+[node name="Goofy" type="Sprite2D" parent="CARBODY2D/Renderer"]
+texture_filter = 1
+rotation = 0.24013093
+texture = SubResource("CompressedTexture2D_0e48y")
+region_enabled = true
+region_rect = Rect2(0, 1400, 40, 40)
+script = ExtResource("4_0hol4")
+
+[node name="container" type="Node2D" parent="CARBODY2D/Renderer"]
+scale = Vector2(1, 0.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CARBODY2D"]
+scale = Vector2(1, 0.6)
+shape = SubResource("CircleShape2D_0hol4")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, -30)
+motion_mode = 1
+script = ExtResource("4_kdubu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -1)
+scale = Vector2(1, 0.36)
+shape = SubResource("CircleShape2D_q6r6c")
+
+[node name="Renderer" type="Node2D" parent="CharacterBody2D"]
+position = Vector2(0, 30)
+script = ExtResource("1_epypp")
+
+[node name="Lakitu" type="Sprite2D" parent="CharacterBody2D/Renderer"]
+texture_filter = 1
+position = Vector2(0, -31)
+texture = ExtResource("4_q6r6c")
+region_enabled = true
+region_rect = Rect2(0, 800, 40, 40)
+script = ExtResource("4_0hol4")
+
+[node name="container" type="Node2D" parent="CharacterBody2D/Renderer"]
+position = Vector2(0, -30)
+scale = Vector2(1, 0.6)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(0, 30)
+offset = Vector2(0, -20)
+zoom = Vector2(5, 5)
+metadata/target = NodePath("..")

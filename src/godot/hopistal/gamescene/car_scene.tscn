@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://bh4t8wkgjuuv4"]
+
+[ext_resource type="Script" uid="uid://v5fcvksb8b1u" path="res://gamescene/scripts/car_ai.gd" id="1_0fnfj"]
+[ext_resource type="Script" uid="uid://c1oewxsn4fo" path="res://gamescene/scripts/sprite_stacker.gd" id="2_vc4l5"]
+[ext_resource type="Texture2D" uid="uid://c1jryd5cpp8ru" path="res://spritestacks/goofy.png" id="3_6sl5n"]
+[ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://gamescene/scripts/rotate.gd" id="4_7tr5n"]
+[ext_resource type="Texture2D" uid="uid://brjbxu2fop3xg" path="res://gamescene/fog_car.png" id="5_fgq2c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h1wma"]
+
+[sub_resource type="Gradient" id="Gradient_gg6ih"]
+offsets = PackedFloat32Array(0.1849315, 0.47945204, 0.89726025)
+colors = PackedColorArray(1, 0.34657717, 0.2800086, 1, 1, 0.49019608, 0.1882353, 1, 0.19215687, 0.16862746, 0.16862746, 1)
+
+[sub_resource type="Gradient" id="Gradient_0fnfj"]
+colors = PackedColorArray(0.43134022, 0.43134025, 0.43134025, 1, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q673q"]
+radius = 24.230375
+
+[node name="CARBODY2D" type="CharacterBody2D"]
+script = ExtResource("1_0fnfj")
+orbit_radius = 80.0
+speed = 150.0
+
+[node name="Renderer" type="Node2D" parent="." node_paths=PackedStringArray("source_im", "im_container", "ground_effects")]
+script = ExtResource("2_vc4l5")
+source_im = NodePath("Goofy")
+im_container = NodePath("container")
+ground_effects = NodePath("ground_effects")
+
+[node name="ground_effects" type="Node2D" parent="Renderer"]
+
+[node name="Particles2D" type="CPUParticles2D" parent="Renderer/ground_effects"]
+material = SubResource("ShaderMaterial_h1wma")
+position = Vector2(-7, -11)
+amount = 32
+texture = ExtResource("5_fgq2c")
+explosiveness = 0.1
+fixed_fps = 30
+draw_order = 1
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 20.0
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_gg6ih")
+color_initial_ramp = SubResource("Gradient_0fnfj")
+
+[node name="Particles2D2" type="CPUParticles2D" parent="Renderer/ground_effects"]
+material = SubResource("ShaderMaterial_h1wma")
+position = Vector2(7, -11)
+amount = 32
+texture = ExtResource("5_fgq2c")
+explosiveness = 0.1
+fixed_fps = 30
+draw_order = 1
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 20.0
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_gg6ih")
+color_initial_ramp = SubResource("Gradient_0fnfj")
+
+[node name="Goofy" type="Sprite2D" parent="Renderer"]
+texture_filter = 1
+texture = ExtResource("3_6sl5n")
+region_enabled = true
+region_rect = Rect2(0, 1400, 40, 40)
+script = ExtResource("4_7tr5n")
+
+[node name="container" type="Node2D" parent="Renderer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+scale = Vector2(1, 0.6)
+shape = SubResource("CircleShape2D_q673q")

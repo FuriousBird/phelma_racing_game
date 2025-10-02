@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj806j3dj5ohu"]
+
+[ext_resource type="Texture2D" uid="uid://bxtm205gwdykk" path="res://gamescene/mobile/joyknobpng.png" id="1_mg7sh"]
+[ext_resource type="Script" uid="uid://cxao4npisrsee" path="res://gamescene/mobile/joystick.gd" id="1_wrmsi"]
+[ext_resource type="Texture2D" uid="uid://y4ok4obnil5g" path="res://gamescene/mobile/joyring.png" id="2_p072t"]
+[ext_resource type="Script" uid="uid://ch3hbljayghwt" path="res://gamescene/mobile/knob.gd" id="3_4afxe"]
+
+[node name="Joystick" type="Node2D"]
+script = ExtResource("1_wrmsi")
+
+[node name="Joyknob" type="Sprite2D" parent="."]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_mg7sh")
+script = ExtResource("3_4afxe")
+maxLength = null
+deadzone = null
+
+[node name="Joyring" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_p072t")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0.32156864)
+offset_left = -139.0
+offset_top = -136.0
+offset_right = 136.0
+offset_bottom = 139.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="button_down" from="Button" to="Joyknob" method="_on_button_down"]
+[connection signal="button_up" from="Button" to="Joyknob" method="_on_button_up"]
