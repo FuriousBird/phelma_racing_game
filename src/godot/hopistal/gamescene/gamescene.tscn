@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwcud51mawi1w"]
+[gd_scene load_steps=15 format=3 uid="uid://dwcud51mawi1w"]
 
 [ext_resource type="Texture2D" uid="uid://ctmyf30hibobn" path="res://icon.svg" id="1_q5pjl"]
 [ext_resource type="PackedScene" uid="uid://bj806j3dj5ohu" path="res://gamescene/mobile/mobile.tscn" id="1_sqlu6"]
+[ext_resource type="Texture2D" uid="uid://curptubucmlwa" path="res://gamescene/ROAD.jpg" id="2_81cw3"]
 [ext_resource type="Script" uid="uid://c3p7r6bvar75c" path="res://gamescene/glidy_mcglideface.gd" id="2_w7c7t"]
 [ext_resource type="Script" uid="uid://c1oewxsn4fo" path="res://gamescene/scripts/sprite_stacker.gd" id="3_l3350"]
 [ext_resource type="PackedScene" uid="uid://bh4t8wkgjuuv4" path="res://gamescene/car_scene.tscn" id="3_yoob7"]
 [ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://gamescene/scripts/rotate.gd" id="4_c2tuv"]
 [ext_resource type="Script" uid="uid://dwpbfg7cnyu6q" path="res://gamescene/scripts/character_body_2d.gd" id="5_msov4"]
 [ext_resource type="Texture2D" uid="uid://dle8hwsy8ntm7" path="res://spritestacks/lakitu.png" id="6_yoob7"]
+[ext_resource type="Script" uid="uid://djjvk8lqq3n01" path="res://gamescene/scripts/road/road_gen.gd" id="11_81cw3"]
 [ext_resource type="Texture2D" uid="uid://crtqripj7buyt" path="res://spritestacks/Screenshot 2025-09-28 at 22-07-29 66286.png (PNG Image 576 × 768 pixels) — Scaled (92%).png" id="11_w7c7t"]
 [ext_resource type="Script" uid="uid://b4f2tw0ghemf6" path="res://gamescene/path_utils.gd" id="12_w7c7t"]
 [ext_resource type="Script" uid="uid://8qot137xux1j" path="res://gamescene/car_spawner.gd" id="13_81cw3"]
@@ -22,6 +24,12 @@ point_count = 25
 
 [node name="WORLD_SCALED" type="Node2D" parent="."]
 scale = Vector2(1, 0.6)
+
+[node name="RoadMesh" type="Node2D" parent="WORLD_SCALED" node_paths=PackedStringArray("path")]
+script = ExtResource("11_81cw3")
+path = NodePath("../Path2D")
+road_width = 60.0
+texture = ExtResource("2_81cw3")
 
 [node name="Marker" type="Node2D" parent="WORLD_SCALED"]
 
