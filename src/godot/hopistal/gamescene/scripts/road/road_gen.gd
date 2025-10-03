@@ -14,6 +14,7 @@ extends Node2D
 	set(value):
 		texture = value
 		_rebuild()
+@export var close_loop:bool = true
 
 var mesh_instance: MeshInstance2D
 
@@ -64,7 +65,33 @@ func _rebuild():
 		indices.append(i+1)
 		indices.append(i+3)
 		indices.append(i+2)
+	
+  # Path2D has this flag
 
+	# --- after building vertices/UVs ---
+	if close_loop:
+		# Get first 2 verts (left/right of start)
+		var first_left = verts[0]
+		var first_right = verts[1]
+
+		# Get last 2 verts (left/right of end)
+		var last_left = verts[verts.size() - 2]
+		var last_right = verts[verts.size() - 1]
+
+		# Build two more triangles stitching the ends
+		var i0 = verts.size() - 2
+		var i1 = verts.size() - 1
+		var i2 = 0
+		var i3 = 1
+
+		indices.append(i0)
+		indices.append(i1)
+		indices.append(i2)
+
+		indices.append(i1)
+		indices.append(i3)
+		indices.append(i2)
+	
 	# Build mesh
 	var arrays: Array = []
 	arrays.resize(Mesh.ARRAY_MAX)
