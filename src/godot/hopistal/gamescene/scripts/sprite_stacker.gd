@@ -7,6 +7,7 @@ var rot = 0
 @export var source_im:Sprite2D
 @export var im_container:Node2D
 @export var ground_effects:Node2D
+@export var autozindex:bool = false
 
 var particle2D:Node2D
 var particle2Denabled:bool = false
@@ -28,6 +29,8 @@ func _process(_delta: float) -> void:
 	for j in range(40):
 		var layer:Sprite2D = source_im.duplicate()
 		im_nodes.append(layer)
+		if autozindex:
+			layer.z_as_relative=40-j
 		im_container.add_child(layer)
 		layer.region_rect = Rect2(0, 40*(40-j), 40, 40)
 		layer.position.y-=j*1.3

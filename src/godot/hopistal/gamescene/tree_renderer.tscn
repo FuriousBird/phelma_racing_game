@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://hikuw6i5i728"]
+
+[ext_resource type="Script" uid="uid://c1oewxsn4fo" path="res://gamescene/scripts/sprite_stacker.gd" id="1_1ivnt"]
+[ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://gamescene/scripts/rotate.gd" id="2_1ivnt"]
+[ext_resource type="Texture2D" uid="uid://cqsbkcu1glqx5" path="res://spritestacks/tree.png" id="2_rx7qd"]
+
+[sub_resource type="Curve" id="Curve_l5fd2"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(0.7965116, 100), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_rx7qd"]
+_data = [Vector2(0.20348838, 0.4044944), 0.0, 0.0, 0, 0, Vector2(0.7965117, 0.7415731), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_rx7qd"]
+offsets = PackedFloat32Array(0, 0.30136988, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.44520548, 1, 1, 1, 1)
+
+[node name="TreeRenderer" type="Node2D" node_paths=PackedStringArray("source_im", "im_container")]
+scale = Vector2(2, 2)
+script = ExtResource("1_1ivnt")
+source_im = NodePath("Tree")
+im_container = NodePath("container")
+
+[node name="Tree" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_rx7qd")
+region_enabled = true
+region_rect = Rect2(0, 400, 40, 40)
+script = ExtResource("2_1ivnt")
+
+[node name="container" type="Node2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -20)
+amount = 32
+lifetime = 4.0
+explosiveness = 0.08
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, 1)
+spread = 150.0
+gravity = Vector2(0, 10)
+initial_velocity_max = 2.0
+radial_accel_max = 0.1
+tangential_accel_min = 1.0
+tangential_accel_max = 5.0
+damping_max = 5.0
+damping_curve = SubResource("Curve_l5fd2")
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_rx7qd")
+color = Color(0.239243, 0.4225057, 0.165007, 1)
+color_ramp = SubResource("Gradient_rx7qd")

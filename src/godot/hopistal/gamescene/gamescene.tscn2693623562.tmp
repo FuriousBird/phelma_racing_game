@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwcud51mawi1w"]
+[gd_scene load_steps=16 format=3 uid="uid://dwcud51mawi1w"]
 
 [ext_resource type="Texture2D" uid="uid://ctmyf30hibobn" path="res://icon.svg" id="1_q5pjl"]
 [ext_resource type="PackedScene" uid="uid://bj806j3dj5ohu" path="res://gamescene/mobile/mobile.tscn" id="1_sqlu6"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bh4t8wkgjuuv4" path="res://gamescene/car_scene.tscn" id="3_yoob7"]
 [ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://gamescene/scripts/rotate.gd" id="4_c2tuv"]
 [ext_resource type="Script" uid="uid://dwpbfg7cnyu6q" path="res://gamescene/scripts/character_body_2d.gd" id="5_msov4"]
-[ext_resource type="Script" uid="uid://cvweedjy5qk24" path="res://gamescene/tree_spawner.gd" id="6_2dtqu"]
 [ext_resource type="Texture2D" uid="uid://dle8hwsy8ntm7" path="res://spritestacks/lakitu.png" id="6_yoob7"]
 [ext_resource type="PackedScene" uid="uid://hikuw6i5i728" path="res://gamescene/tree_renderer.tscn" id="7_2dtqu"]
 [ext_resource type="Script" uid="uid://djjvk8lqq3n01" path="res://gamescene/scripts/road/road_gen.gd" id="11_81cw3"]
@@ -55,10 +54,21 @@ offset_bottom = 23.0
 [node name="CarSpawner" type="Node2D" parent="WORLD_SCALED" node_paths=PackedStringArray("spawner_race_path")]
 script = ExtResource("13_81cw3")
 car_scene = ExtResource("3_yoob7")
+delay = null
+num = 5
 spawner_race_path = NodePath("../Path2D")
 
+[node name="TreeSpawner" type="Node2D" parent="WORLD_SCALED" node_paths=PackedStringArray("spawner_race_path")]
+script = ExtResource("13_81cw3")
+car_scene = ExtResource("3_yoob7")
+delay = null
+num = 5
+spawner_race_path = NodePath("../Path2D")
+
+[node name="TreeRenderer" parent="WORLD_SCALED" instance=ExtResource("7_2dtqu")]
+position = Vector2(172.02, -26.666664)
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="WORLD_SCALED" node_paths=PackedStringArray("JoystickController")]
-z_index = 50
 position = Vector2(0, -30)
 motion_mode = 1
 script = ExtResource("5_msov4")
@@ -84,42 +94,18 @@ position = Vector2(0, -30)
 [node name="Camera2D" type="Camera2D" parent="WORLD_SCALED/CharacterBody2D"]
 position = Vector2(1, 30)
 scale = Vector2(1, 1.6666666)
-zoom = Vector2(3, 3)
+zoom = Vector2(5, 5)
 
 [node name="Joystick" parent="WORLD_SCALED/CharacterBody2D/Camera2D" instance=ExtResource("1_sqlu6")]
 modulate = Color(1, 1, 1, 0.41568628)
 
-[node name="Trees" type="Node2D" parent="WORLD_SCALED"]
-z_index = 1
-position = Vector2(224, -358.3333)
-
-[node name="TreeSpawner2" type="Node2D" parent="WORLD_SCALED/Trees" node_paths=PackedStringArray("spawner_race_path")]
-position = Vector2(-7, -126.666664)
-script = ExtResource("6_2dtqu")
-tree_scene = ExtResource("7_2dtqu")
-spawner_race_path = NodePath("../../Path2D")
-
-[node name="TreeSpawner" type="Node2D" parent="WORLD_SCALED/Trees" node_paths=PackedStringArray("spawner_race_path")]
-position = Vector2(-7, 85.00002)
-script = ExtResource("6_2dtqu")
-tree_scene = ExtResource("7_2dtqu")
-spawner_race_path = NodePath("../../Path2D")
-
-[node name="TreeSpawner3" type="Node2D" parent="WORLD_SCALED/Trees" node_paths=PackedStringArray("spawner_race_path")]
-position = Vector2(117, -134.99998)
-script = ExtResource("6_2dtqu")
-tree_scene = ExtResource("7_2dtqu")
-spawner_race_path = NodePath("../../Path2D")
-
 [node name="Screenshot20250928At22072966286_png(pngImage576×768Pixels)—Scaled(92_)" type="Sprite2D" parent="WORLD_SCALED"]
 z_index = -1
-texture_filter = 1
 position = Vector2(681, -458.33328)
 scale = Vector2(8.349, 8.349)
 texture = ExtResource("11_w7c7t")
 region_enabled = true
 region_rect = Rect2(0, 0, 180.5, 187)
-metadata/_edit_lock_ = true
 
 [node name="Path2D" type="Path2D" parent="WORLD_SCALED"]
 z_index = -1

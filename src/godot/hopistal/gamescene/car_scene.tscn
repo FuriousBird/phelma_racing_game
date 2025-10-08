@@ -1,19 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh4t8wkgjuuv4"]
+[gd_scene load_steps=12 format=3 uid="uid://bh4t8wkgjuuv4"]
 
 [ext_resource type="Script" uid="uid://v5fcvksb8b1u" path="res://gamescene/scripts/car_ai.gd" id="1_0fnfj"]
 [ext_resource type="Script" uid="uid://c1oewxsn4fo" path="res://gamescene/scripts/sprite_stacker.gd" id="2_vc4l5"]
 [ext_resource type="Texture2D" uid="uid://c1jryd5cpp8ru" path="res://spritestacks/goofy.png" id="3_6sl5n"]
+[ext_resource type="Texture2D" uid="uid://dvyjr75qv3lb3" path="res://gamescene/flash.png" id="3_vc4l5"]
 [ext_resource type="Script" uid="uid://y3wpqop0x2o1" path="res://gamescene/scripts/rotate.gd" id="4_7tr5n"]
 [ext_resource type="Texture2D" uid="uid://brjbxu2fop3xg" path="res://gamescene/fog_car.png" id="5_fgq2c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h1wma"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sl5n"]
+atlas = ExtResource("3_vc4l5")
+region = Rect2(128, 0, 128, 128)
+margin = Rect2(-10, -10, -20, -20)
+
 [sub_resource type="Gradient" id="Gradient_gg6ih"]
 offsets = PackedFloat32Array(0.1849315, 0.47945204, 0.89726025)
-colors = PackedColorArray(1, 0.34657717, 0.2800086, 1, 1, 0.49019608, 0.1882353, 1, 0.19215687, 0.16862746, 0.16862746, 1)
+colors = PackedColorArray(1, 0.34657717, 0.2800086, 1, 0.19, 0.3790002, 1, 1, 0.7816009, 0.66015565, 0.8043346, 1)
 
 [sub_resource type="Gradient" id="Gradient_0fnfj"]
-colors = PackedColorArray(0.43134022, 0.43134025, 0.43134025, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.15068494, 1)
+colors = PackedColorArray(0.43134022, 0.43134025, 0.43134025, 1, 0.5170287, 0.5170287, 0.5170287, 1, 1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q673q"]
 radius = 24.230375
@@ -35,21 +42,26 @@ ground_effects = NodePath("ground_effects")
 material = SubResource("ShaderMaterial_h1wma")
 position = Vector2(-7, -11)
 amount = 32
-texture = ExtResource("5_fgq2c")
+texture = SubResource("AtlasTexture_6sl5n")
+lifetime = 0.2
 explosiveness = 0.1
+lifetime_randomness = 0.3
 fixed_fps = 30
 draw_order = 1
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_max = 20.0
-scale_amount_min = 0.01
-scale_amount_max = 0.03
+initial_velocity_max = 30.0
+radial_accel_min = 0.5
+radial_accel_max = 12.37
+scale_amount_min = 0.02
+scale_amount_max = 0.06
 color_ramp = SubResource("Gradient_gg6ih")
 color_initial_ramp = SubResource("Gradient_0fnfj")
 
 [node name="Particles2D2" type="CPUParticles2D" parent="Renderer/ground_effects"]
 material = SubResource("ShaderMaterial_h1wma")
 position = Vector2(7, -11)
+emitting = false
 amount = 32
 texture = ExtResource("5_fgq2c")
 explosiveness = 0.1
