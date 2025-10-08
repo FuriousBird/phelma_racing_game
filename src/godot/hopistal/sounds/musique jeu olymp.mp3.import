@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cm41mgtynleow"
+path="res://.godot/imported/musique jeu olymp.mp3-5b10c7e123670870629bc5c7e6ea8e0f.mp3str"
+
+[deps]
+
+source_file="res://sounds/musique jeu olymp.mp3"
+dest_files=["res://.godot/imported/musique jeu olymp.mp3-5b10c7e123670870629bc5c7e6ea8e0f.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
